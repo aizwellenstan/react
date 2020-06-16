@@ -1,0 +1,42 @@
+enum MangaStatus {
+    COMPLETED
+    ONGOING
+    SUSPENDED
+}
+
+scalar Date
+
+type Chapter {
+    id: ID!
+    images: [ChapterImage!]!
+    lastUpdated: Date!
+    number: Int!
+    title: String
+}
+
+type ChapterImage {
+    height: Int!
+    url: String!
+    width: Int!
+}
+
+type Manga {
+    id: ID!
+    info: MangaInfo!
+    image: String
+    lastUpdated: Date!
+    status: MangaStatus
+    title: String!
+}
+
+type MangaInfo {
+    chapters: [Chapter!]!
+    description: String!
+    id: ID!
+}
+
+type Query {
+    chapter(id: ID!): Chapter!
+    manga(id: ID!): Manga!
+    mangas(searchTitle: String): [Manga!]!
+}
